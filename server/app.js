@@ -6,17 +6,18 @@ const schema = require('./schema/schema')
 const testSchema = require('./schema/types_schema')
 
 const cors = require('cors')
-const port = process.env.port || 4000
+const port = process.env.PORT || 4000
 
 const app = express();
 
 
 //DO NOT COMMIT PASSWORD!
-mongoose.connect('mongodb+srv://tessa:crazydog@m001cluster-ldcue.mongodb.net/jp?retryWrites=true&w=majority', { useNewUrlParser: true })
+mongoose.connect('mongodb+srv://tessa:@m001cluster-ldcue.mongodb.net/jp?retryWrites=true&w=majority', { useNewUrlParser: true })
 mongoose.connection.once('open', () => {
    console.log('Mongo is connected')
 })
 
+app.use(cors())
 app.use('/graphql', graphqlHTTP({
     graphiql: true,
     schema: schema
